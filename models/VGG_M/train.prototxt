@@ -1,0 +1,523 @@
+name: "VGG_CNN_M_1024"
+layer {
+  name: 'data'
+  type: 'Python'
+  top: 'data'
+  top: 'rois'
+  top: 'labels'
+  python_param {
+    module: 'roi_data_layer.layer'
+    layer: 'RoIDataLayer'
+    param_str: "'num_classes': 20"
+  }
+}
+layer {
+  name: "conv1"
+  type: "Convolution"
+  bottom: "data"
+  top: "conv1"
+  param {
+    lr_mult: 0
+    decay_mult: 1
+  }
+  param {
+    lr_mult: 0
+    decay_mult: 0
+  }
+  convolution_param {
+    num_output: 96
+    kernel_size: 7
+    stride: 2
+  }
+}
+layer {
+  name: "relu1"
+  type: "ReLU"
+  bottom: "conv1"
+  top: "conv1"
+}
+layer {
+  name: "norm1"
+  type: "LRN"
+  bottom: "conv1"
+  top: "norm1"
+  lrn_param {
+    local_size: 5
+    alpha: 0.0005
+    beta: 0.75
+    k: 2
+  }
+}
+layer {
+  name: "pool1"
+  type: "Pooling"
+  bottom: "norm1"
+  top: "pool1"
+  pooling_param {
+    pool: MAX
+    kernel_size: 3
+    stride: 2
+  }
+}
+layer {
+  name: "conv2"
+  type: "Convolution"
+  bottom: "pool1"
+  top: "conv2"
+  param {
+    lr_mult: 1
+    decay_mult: 1
+  }
+  param {
+    lr_mult: 2
+    decay_mult: 0
+  }
+  convolution_param {
+    num_output: 256
+    pad: 1
+    kernel_size: 5
+    stride: 2
+  }
+}
+layer {
+  name: "relu2"
+  type: "ReLU"
+  bottom: "conv2"
+  top: "conv2"
+}
+layer {
+  name: "norm2"
+  type: "LRN"
+  bottom: "conv2"
+  top: "norm2"
+  lrn_param {
+    local_size: 5
+    alpha: 0.0005
+    beta: 0.75
+    k: 2
+  }
+}
+#layer {
+#  name: "pool2"
+#  type: "Pooling"
+#  bottom: "norm2"
+#  top: "pool2"
+#  pooling_param {
+#    pool: MAX
+#    kernel_size: 3
+#    stride: 2
+#  }
+#}
+layer {
+  name: "conv3"
+  type: "Convolution"
+  bottom: "norm2"
+  top: "conv3"
+  param {
+    lr_mult: 1
+    decay_mult: 1
+  }
+  param {
+    lr_mult: 2
+    decay_mult: 0
+  }
+  convolution_param {
+    num_output: 512
+    pad: 2
+    dilation: 2
+    kernel_size: 3
+  }
+}
+layer {
+  name: "relu3"
+  type: "ReLU"
+  bottom: "conv3"
+  top: "conv3"
+}
+layer {
+  name: "conv4"
+  type: "Convolution"
+  bottom: "conv3"
+  top: "conv4"
+  param {
+    lr_mult: 1
+    decay_mult: 1
+  }
+  param {
+    lr_mult: 2
+    decay_mult: 0
+  }
+  convolution_param {
+    num_output: 512
+    pad: 2
+    dilation: 2
+    kernel_size: 3
+  }
+}
+layer {
+  name: "relu4"
+  type: "ReLU"
+  bottom: "conv4"
+  top: "conv4"
+}
+layer {
+  name: "conv5"
+  type: "Convolution"
+  bottom: "conv4"
+  top: "conv5"
+  param {
+    lr_mult: 1
+    decay_mult: 1
+  }
+  param {
+    lr_mult: 2
+    decay_mult: 0
+  }
+  convolution_param {
+    num_output: 512
+    pad: 2
+    dilation: 2
+    kernel_size: 3
+  }
+}
+layer {
+  name: "relu5"
+  type: "ReLU"
+  bottom: "conv5"
+  top: "conv5"
+}
+layer {
+  name: "roi_pool"
+  type: "ROIPooling"
+  bottom: "conv5"
+  bottom: "rois"
+  top: "pool5"
+  roi_pooling_param {
+    pooled_w: 6
+    pooled_h: 6
+    spatial_scale: 0.125 # 1/16
+  }
+}
+layer {
+  name: "fc6"
+  type: "InnerProduct"
+  bottom: "pool5"
+  top: "fc6"
+  param {
+    lr_mult: 1
+    decay_mult: 1
+  }
+  param {
+    lr_mult: 2
+    decay_mult: 0
+  }
+  inner_product_param {
+    num_output: 4096
+  }
+}
+layer {
+  name: "relu6"
+  type: "ReLU"
+  bottom: "fc6"
+  top: "fc6"
+}
+layer {
+  name: "drop6"
+  type: "Dropout"
+  bottom: "fc6"
+  top: "fc6"
+  dropout_param {
+    dropout_ratio: 0.5
+  }
+}
+layer {
+  name: "fc7"
+  type: "InnerProduct"
+  bottom: "fc6"
+  top: "fc7"
+  param {
+    lr_mult: 1
+    decay_mult: 1
+  }
+  param {
+    lr_mult: 2
+    decay_mult: 0
+  }
+  inner_product_param {
+    num_output: 1024
+  }
+}
+layer {
+  name: "relu7"
+  type: "ReLU"
+  bottom: "fc7"
+  top: "fc7"
+}
+layer {
+  name: "drop7"
+  type: "Dropout"
+  bottom: "fc7"
+  top: "fc7"
+  dropout_param {
+    dropout_ratio: 0.5
+  }
+}
+layer {
+  name: "midn_score0"
+  type: "InnerProduct"
+  bottom: "fc7"
+  top: "midn_score0"
+  param {
+    lr_mult: 1
+    decay_mult: 1
+  }
+  param {
+    lr_mult: 2
+    decay_mult: 0
+  }
+  inner_product_param {
+    num_output: 20
+    weight_filler {
+      type: "gaussian"
+      std: 0.01
+    }
+    bias_filler {
+      type: "constant"
+      value: 0
+    }
+  }
+}
+layer {
+  name: "midn_prob0"
+  type: "Softmax"
+  bottom: "midn_score0"
+  top: "midn_prob0"
+  softmax_param {
+    axis: 0
+  }
+}
+layer {
+  name: "midn_score1"
+  type: "InnerProduct"
+  bottom: "fc7"
+  top: "midn_score1"
+  param {
+    lr_mult: 1
+    decay_mult: 1
+  }
+  param {
+    lr_mult: 2
+    decay_mult: 0
+  }
+  inner_product_param {
+    num_output: 20
+    weight_filler {
+      type: "gaussian"
+      std: 0.01
+    }
+    bias_filler {
+      type: "constant"
+      value: 0
+    }
+  }
+}
+layer {
+  name: "midn_prob1"
+  type: "Softmax"
+  bottom: "midn_score1"
+  top: "midn_prob1"
+}
+layer {
+  name: "midn_prob"
+  type: "Eltwise"
+  bottom: "midn_prob0"
+  bottom: "midn_prob1"
+  top: "midn_prob"
+  eltwise_param {
+    operation: PROD
+  }
+}
+layer {
+  name: "global_pool"
+  type: "GlobalSumPooling"
+  bottom: "midn_prob"
+  top: "global_pool"
+}
+layer {
+  name: "loss_midn"
+  type: "MulticlassCrossEntropyLoss"
+  bottom: "global_pool"
+  bottom: "labels"
+  top: "loss_midn"
+  loss_weight: 1
+}
+
+layer {
+  name: "oicr_layer"
+  type: "Python"
+  bottom: "rois"
+  bottom: "midn_prob"
+  bottom: "labels"
+  top: "labels_ic"
+  top: "cls_loss_weights"
+  python_param {
+    module: 'oicr_layer.layer'
+    layer: 'OICRLayer'
+    param_str: "'num_classes': 21"
+  }
+}
+layer {
+  name: "ic_score"
+  type: "InnerProduct"
+  bottom: "fc7"
+  top: "ic_score"
+  param {
+    lr_mult: 10
+    decay_mult: 1
+  }
+  param {
+    lr_mult: 20
+    decay_mult: 0
+  }
+  inner_product_param {
+    num_output: 21
+    weight_filler {
+      type: "gaussian"
+      std: 0.01
+    }
+    bias_filler {
+      type: "constant"
+      value: 0
+    }
+  }
+}
+layer {
+  name: "loss_oicr"
+  type: "WeightedSoftmaxWithLoss"
+  bottom: "ic_score"
+  bottom: "labels_ic"
+  bottom: "cls_loss_weights"
+  propagate_down: 1
+  propagate_down: 0
+  propagate_down: 0
+  top: "loss_oicr"
+  loss_weight: 1
+}
+
+layer {
+  name: "ic_prob"
+  type: "Softmax"
+  bottom: "ic_score"
+  top: "ic_prob"
+}
+
+layer {
+  name: "oicr_layer1"
+  type: "Python"
+  bottom: "rois"
+  bottom: "ic_prob"
+  bottom: "labels"
+  top: "labels_ic1"
+  top: "cls_loss_weights1"
+  python_param {
+    module: 'oicr_layer.layer'
+    layer: 'OICRLayer'
+    param_str: "'num_classes': 21"
+  }
+}
+layer {
+  name: "ic_score1"
+  type: "InnerProduct"
+  bottom: "fc7"
+  top: "ic_score1"
+  param {
+    lr_mult: 10
+    decay_mult: 1
+  }
+  param {
+    lr_mult: 20
+    decay_mult: 0
+  }
+  inner_product_param {
+    num_output: 21
+    weight_filler {
+      type: "gaussian"
+      std: 0.01
+    }
+    bias_filler {
+      type: "constant"
+      value: 0
+    }
+  }
+}
+layer {
+  name: "loss_oicr1"
+  type: "WeightedSoftmaxWithLoss"
+  bottom: "ic_score1"
+  bottom: "labels_ic1"
+  bottom: "cls_loss_weights1"
+  propagate_down: 1
+  propagate_down: 0
+  propagate_down: 0
+  top: "loss_oicr1"
+  loss_weight: 1
+}
+
+layer {
+  name: "ic_prob1"
+  type: "Softmax"
+  bottom: "ic_score1"
+  top: "ic_prob1"
+}
+
+layer {
+  name: "oicr_layer2"
+  type: "Python"
+  bottom: "rois"
+  bottom: "ic_prob1"
+  bottom: "labels"
+  top: "labels_ic2"
+  top: "cls_loss_weights2"
+  python_param {
+    module: 'oicr_layer.layer'
+    layer: 'OICRLayer'
+    param_str: "'num_classes': 21"
+  }
+}
+layer {
+  name: "ic_score2"
+  type: "InnerProduct"
+  bottom: "fc7"
+  top: "ic_score2"
+  param {
+    lr_mult: 10
+    decay_mult: 1
+  }
+  param {
+    lr_mult: 20
+    decay_mult: 0
+  }
+  inner_product_param {
+    num_output: 21
+    weight_filler {
+      type: "gaussian"
+      std: 0.01
+    }
+    bias_filler {
+      type: "constant"
+      value: 0
+    }
+  }
+}
+layer {
+  name: "loss_oicr2"
+  type: "WeightedSoftmaxWithLoss"
+  bottom: "ic_score2"
+  bottom: "labels_ic2"
+  bottom: "cls_loss_weights2"
+  propagate_down: 1
+  propagate_down: 0
+  propagate_down: 0
+  top: "loss_oicr2"
+  loss_weight: 1
+}

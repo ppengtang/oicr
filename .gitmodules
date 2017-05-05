@@ -1,0 +1,3 @@
+[submodule "caffe-oicr"]
+	path = caffe-oicr
+	url = https://github.com/ppengtang/caffe.git
