@@ -137,7 +137,7 @@ If you find OICR useful in your research, please consider citing:
     ```
     Using symlinks is a good idea because you will likely want to share the same PASCAL dataset installation between multiple projects.
 
-5. [Optional] follow similar steps to get PASCAL VOC 2012
+5. [Optional] follow similar steps to get PASCAL VOC 2012.
 
 6. You should put the generated proposal data under the folder $OICR_ROOT/data/selective_search_data, with the name "voc_2007_trainval.mat", "voc_2007_test.mat", just as the form of [fast-rcnn](https://github.com/rbgirshick/fast-rcnn).
 
@@ -193,4 +193,4 @@ These models are all available in the [Caffe Model Zoo](https://github.com/BVLC/
 
 Test output is written underneath `$OICR_ROOT/output`.
 
-The codes for training fast rcnn by pseudo ground truths are available on [here](https://github.com/ppengtang/fast-rcnn)
+The codes for training fast rcnn by pseudo ground truths are available on [here](https://github.com/ppengtang/fast-rcnn).
