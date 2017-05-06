@@ -148,11 +148,11 @@ If you find OICR useful in your research, please consider citing:
 Pre-computed selective search boxes can also be downloaded for VOC2007 and VOC2012.
 
 ```Shell
-cd $FRCN_ROOT
+cd $OICR_ROOT
 ./data/scripts/fetch_selective_search_data.sh
 ```
 
-This will populate the `$FRCN_ROOT/data` folder with `selective_selective_data`.
+This will populate the `$OICR_ROOT/data` folder with `selective_selective_data`.
 (The script is copied from the [fast-rcnn](https://github.com/rbgirshick/fast-rcnn)).
 
 ### Download pre-trained ImageNet models
@@ -160,7 +160,7 @@ This will populate the `$FRCN_ROOT/data` folder with `selective_selective_data`.
 Pre-trained ImageNet models can be downloaded.
 
 ```Shell
-cd $FRCN_ROOT
+cd $OICR_ROOT
 ./data/scripts/fetch_imagenet_models.sh
 ```
 These models are all available in the [Caffe Model Zoo](https://github.com/BVLC/caffe/wiki/Model-Zoo), but are provided here for your convenience.
