@@ -99,10 +99,6 @@ __C.RNG_SEED = 2
 # A small number that's used many times
 __C.EPS = 1e-14
 
-__C.USE_GPU_NMS = True
-
-__C.GPU_ID = 1
-
 # Root directory of project
 __C.ROOT_DIR = osp.abspath(osp.join(osp.dirname(__file__), '..', '..'))
 
