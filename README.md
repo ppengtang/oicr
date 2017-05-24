@@ -193,4 +193,12 @@ These models are all available in the [Caffe Model Zoo](https://github.com/BVLC/
 
 Test output is written underneath `$OICR_ROOT/output`.
 
+#### Evaluation
+For mAP, run the python code tools/reval.py
+```Shell
+./tools/reval.py $output_dir --imdb voc_2007_test --matlab
+```
+
+For CorLoc, put the results under the folder $VOCdevkit/results/VOC2007/Main, run the matlab code eval_discovery.m
+
 The codes for training fast rcnn by pseudo ground truths are available on [here](https://github.com/ppengtang/fast-rcnn).
