@@ -92,6 +92,17 @@ class imdb(object):
         """
         raise NotImplementedError
 
+    def evaluate_discovery(self, all_boxes, output_dir=None):
+        """
+        all_boxes is a list of length number-of-classes.
+        Each list element is a list of length number-of-images.
+        Each of those list elements is either an empty list []
+        or a numpy array of detection.
+
+        all_boxes[class][image] = [] or np.array of shape #dets x 5
+        """
+        raise NotImplementedError
+
     def append_flipped_images(self):
         num_images = self.num_images
         widths = [PIL.Image.open(self.image_path_at(i)).size[0]

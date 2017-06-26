@@ -199,6 +199,10 @@ For mAP, run the python code tools/reval.py
 ./tools/reval.py $output_dir --imdb voc_2007_test --matlab
 ```
 
-For CorLoc, put the results under the folder $VOCdevkit/results/VOC2007/Main, run the matlab code eval_discovery.m
+For CorLoc, run the python code tools/reval_discovery.py
+```Shell
+./tools/reval_discovery.py $output_dir --imdb voc_2007_trainval
+```
+
 
 The codes for training fast rcnn by pseudo ground truths are available on [here](https://github.com/ppengtang/fast-rcnn).

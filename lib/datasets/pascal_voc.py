@@ -20,6 +20,7 @@ import cPickle
 import subprocess
 import uuid
 from voc_eval import voc_eval
+from dis_eval import dis_eval
 from fast_rcnn.config import cfg
 
 class pascal_voc(datasets.imdb):
@@ -163,7 +164,6 @@ class pascal_voc(datasets.imdb):
         filename = os.path.join(self._data_path, 'Annotations', index + '.xml')
         tree = ET.parse(filename)
         objs = tree.findall('object')
-        objs = tree.findall('object')
         if not self.config['use_diff']:
             # Exclude the samples labeled as difficult
             non_diff_objs = [
@@ -281,11 +281,55 @@ class pascal_voc(datasets.imdb):
         print('Running:\n{}'.format(cmd))
         status = subprocess.call(cmd, shell=True)
 
+    def _eval_discovery(self, output_dir):
+        annopath = os.path.join(
+            self._devkit_path,
+            'VOC' + self._year,
+            'Annotations',
+            '{:s}.xml')
+        imagesetfile = os.path.join(
+            self._devkit_path,
+            'VOC' + self._year,
+            'ImageSets',
+            'Main',
+            self._image_set + '.txt')
+        cachedir = os.path.join(self._devkit_path, 'annotations_dis_cache')
+        corlocs = []
+        if not os.path.isdir(output_dir):
+            os.mkdir(output_dir)
+        for i, cls in enumerate(self._classes):
+            if cls == '__background__':
+                continue
+            filename = self._get_voc_results_file_template().format(cls)
+            corloc = dis_eval(
+                filename, annopath, imagesetfile, cls, cachedir, ovthresh=0.5)
+            corlocs += [corloc]
+            print('CorLoc for {} = {:.4f}'.format(cls, corloc))
+            with open(os.path.join(output_dir, cls + '_corloc.pkl'), 'w') as f:
+                cPickle.dump({'corloc': corloc}, f)
+        print('Mean CorLoc = {:.4f}'.format(np.mean(corlocs)))
+        print('~~~~~~~~')
+        print('Results:')
+        for corloc in corlocs:
+            print('{:.3f}'.format(corloc))
+        print('{:.3f}'.format(np.mean(corlocs)))
+        print('~~~~~~~~')
+
     def evaluate_detections(self, all_boxes, output_dir):
         self._write_voc_results_file(all_boxes)
         self._do_python_eval(output_dir)
         if self.config['matlab_eval']:
             self._do_matlab_eval(output_dir)
+        if self.config['cleanup']:
+            for cls in self._classes:
+                if cls == '__background__':
+                    continue
+                filename = self._get_voc_results_file_template().format(cls)
+                os.remove(filename)
+
+    def evaluate_discovery(self, all_boxes, output_dir):
+        self._write_voc_results_file(all_boxes)
+        self._eval_discovery(output_dir)
         if self.config['cleanup']:
             for cls in self._classes:
                 if cls == '__background__':

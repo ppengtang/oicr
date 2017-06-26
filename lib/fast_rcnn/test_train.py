@@ -199,8 +199,6 @@ def test_net_train(net, imdb):
     # timers
     _t = {'im_detect' : Timer(), 'misc' : Timer()}
 
-    scores_all = []
-    boxes_all = []
     images_real = np.zeros((num_images,), dtype=object)
     gt = np.zeros((num_images, ), dtype=object)
     roidb = imdb.roidb
@@ -210,17 +208,12 @@ def test_net_train(net, imdb):
         scores, boxes = im_detect(net, im, roidb[i]['boxes'])
         _t['im_detect'].toc()
 
-        scores_all.append(scores)
-        boxes_all.append(boxes)
-
         _t['misc'].tic()
         for j in xrange(imdb.num_classes):
-            cls_file = os.path.join(output_dir, 'comp4_det_test_'+imdb.classes[j]+'.txt')
-            with open(cls_file, 'a') as f:
-                tmp = np.argmax(scores[:, j])
-                f.write('{:s} {:f} {:f} {:f} {:f}\n'.format(imdb.image_index[i],boxes[tmp, j*4], 
-                                                            boxes[tmp, j*4+1], boxes[tmp, j*4+2], 
-                                                            boxes[tmp, j*4+3]))
+            index = np.argmax(scores[:, j])
+            all_boxes[j][i] = \
+                np.hstack((boxes[index, j*4:(j+1)*4].reshape(1, -1), 
+                           np.array([[scores[index, j]]])))
 
         gt_tmp = {'aeroplane' : np.empty((0, 4), dtype=np.float32), 
                   'bicycle' : np.empty((0, 4), dtype=np.float32), 
@@ -264,3 +257,9 @@ def test_net_train(net, imdb):
         
     model_save_gt = {'images' : images_real, 'gt' : gt}
     sio.savemat('{}_gt.mat'.format(imdb.name), model_save_gt)
+
+    dis_file = os.path.join(output_dir, 'discovery.pkl')
+    with open(dis_file, 'wb') as f:
+        cPickle.dump(all_boxes, f, cPickle.HIGHEST_PROTOCOL)
+
+    imdb.evaluate_discovery(all_boxes, output_dir)
