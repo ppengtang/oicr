@@ -180,7 +180,7 @@ These models are all available in the [Caffe Model Zoo](https://github.com/BVLC/
 #### On trainval
 ```Shell
 ./tools/test_net.py --gpu 1 --def models/VGG16/test.prototxt \
-	--net output/default/voc_2007_trainval/vgg16_oicr_iter_70000.caffemodel \
+  --net output/default/voc_2007_trainval/vgg16_oicr_iter_70000.caffemodel \
   --imdb voc_2007_trainval
 ```
 
