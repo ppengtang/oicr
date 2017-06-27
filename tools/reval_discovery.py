@@ -39,7 +39,6 @@ def parse_args():
 def from_dets(imdb_name, output_dir, args):
     imdb = get_imdb(imdb_name)
     imdb.competition_mode(args.comp_mode)
-    imdb.config['matlab_eval'] = args.matlab_eval
     with open(os.path.join(output_dir, 'discovery.pkl'), 'rb') as f:
         dets = cPickle.load(f)
 
