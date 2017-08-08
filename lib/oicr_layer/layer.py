@@ -85,7 +85,7 @@ def _get_highest_score_proposals(boxes, cls_prob, im_labels):
     gt_scores = np.zeros((0, 1), dtype=np.float32)
     for i in xrange(num_classes):
         if im_labels_tmp[i] == 1:
-            cls_prob_tmp = cls_prob[:, i]
+            cls_prob_tmp = cls_prob[:, i].copy()
             max_index = np.argmax(cls_prob_tmp)
 
             if DEBUG:
@@ -95,6 +95,7 @@ def _get_highest_score_proposals(boxes, cls_prob, im_labels):
             gt_classes = np.vstack((gt_classes, (i + 1) * np.ones((1, 1), dtype=np.int32)))
             gt_scores = np.vstack((gt_scores, 
                                    cls_prob_tmp[max_index] * np.ones((1, 1), dtype=np.float32)))
+            cls_prob[max_index, :] = 0
 
     proposals = {'gt_boxes' : gt_boxes,
                  'gt_classes': gt_classes,
