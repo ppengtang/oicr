@@ -287,6 +287,11 @@ def test_net(net, imdb):
     det_file = os.path.join(output_dir, 'detections.pkl')
     with open(det_file, 'wb') as f:
         cPickle.dump(all_boxes, f, cPickle.HIGHEST_PROTOCOL)
+        
+    det_file_all = os.path.join(output_dir, 'detections_all.pkl')
+    results_all = {'scores_all' : scores_all, 'boxes_all' : boxes_all}
+    with open(det_file_all, 'wb') as f:
+        cPickle.dump(results_all, f, cPickle.HIGHEST_PROTOCOL)
 
     print 'Applying NMS to all detections'
     nms_dets = apply_nms(all_boxes, cfg.TEST.NMS)
