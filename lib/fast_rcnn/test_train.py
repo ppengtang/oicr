@@ -202,11 +202,16 @@ def test_net_train(net, imdb):
     images_real = np.zeros((num_images,), dtype=object)
     gt = np.zeros((num_images, ), dtype=object)
     roidb = imdb.roidb
+    
+    scores_all = []
+    boxes_all = []
     for i in xrange(num_images):
         im = cv2.imread(imdb.image_path_at(i))
         _t['im_detect'].tic()
         scores, boxes = im_detect(net, im, roidb[i]['boxes'])
         _t['im_detect'].toc()
+        scores_all.append(scores)
+        boxes_all.append(boxes)
 
         _t['misc'].tic()
         for j in xrange(imdb.num_classes):
@@ -261,5 +266,10 @@ def test_net_train(net, imdb):
     dis_file = os.path.join(output_dir, 'discovery.pkl')
     with open(dis_file, 'wb') as f:
         cPickle.dump(all_boxes, f, cPickle.HIGHEST_PROTOCOL)
+        
+    dis_file_all = os.path.join(output_dir, 'discovery_all.pkl')
+    results_all = {'scores_all' : scores_all, 'boxes_all' : boxes_all}
+    with open(dis_file_all, 'wb') as f:
+        cPickle.dump(results_all, f, cPickle.HIGHEST_PROTOCOL)
 
     imdb.evaluate_discovery(all_boxes, output_dir)
