@@ -17,7 +17,7 @@ import numpy as np
 import os
 
 from caffe.proto import caffe_pb2
-import google.protobuf as pb2
+from google.protobuf import text_format
 
 class SolverWrapper(object):
     """A simple wrapper around Caffe's solver.
@@ -37,7 +37,7 @@ class SolverWrapper(object):
             self.solver.net.copy_from(pretrained_model)
         self.solver_param = caffe_pb2.SolverParameter()
         with open(solver_prototxt, 'rt') as f:
-            pb2.text_format.Merge(f.read(), self.solver_param)
+            text_format.Merge(f.read(), self.solver_param)
 
         self.solver.net.layers[0].set_roidb(roidb)
 
