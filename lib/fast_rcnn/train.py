@@ -17,7 +17,7 @@ import numpy as np
 import os
 
 from caffe.proto import caffe_pb2
-from google.protobuf import text_format
+import google.protobuf.text_format
 
 class SolverWrapper(object):
     """A simple wrapper around Caffe's solver.
