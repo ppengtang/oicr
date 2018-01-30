@@ -195,6 +195,13 @@ class pascal_voc(datasets.imdb):
     def _get_voc_results_file_template(self):
         # VOCdevkit/results/VOC2007/Main/<comp_id>_det_test_aeroplane.txt
         filename = self._get_comp_id() + '_det_' + self._image_set + '_{:s}.txt'
+        result_dir = os.path.join(
+            self._devkit_path,
+            'results',
+            'VOC' + self._year,
+            'Main')
+        if not os.path.exists(result_dir):
+            os.makedirs(result_dir)
         path = os.path.join(
             self._devkit_path,
             'results',
