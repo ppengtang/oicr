@@ -2,6 +2,10 @@
 
 By [Peng Tang](https://ppengtang.github.io/), [Xinggang Wang](http://mclab.eic.hust.edu.cn/~xwang/index.htm), [Xiang Bai](http://mclab.eic.hust.edu.cn/~xbai/), and [Wenyu Liu](http://mclab.eic.hust.edu.cn/MCWebDisplay/PersonDetails.aspx?Name=Wenyu%20Liu).
 
+Thanks [Vadim](http://vadimkantorov.com/) for trying to port Caffe code and layers to PyTorch.
+Thus the OICR can be optimized with the PyTorch backend.
+See the [issue](https://github.com/ppengtang/oicr/issues/6#issuecomment-362929847) and [codes](https://github.com/vadimkantorov/caffemodel2pytorch).
+
 ### Introduction
 
 **Online Instance Classifier Refinement (OICR)** is a framework for weakly supervised object detection with deep ConvNets. 
