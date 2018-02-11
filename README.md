@@ -10,6 +10,9 @@ By [Peng Tang](https://ppengtang.github.io/), [Xinggang Wang](http://mclab.eic.h
 
 The paper has been accepted by CVPR 2017. For more details, please refer to our [paper](https://arxiv.org/abs/1704.00138).
 
+The code to train and eval OICR using PyTorch as backend is available [here](https://github.com/vadimkantorov/caffemodel2pytorch/blob/master/README.md).
+Thanks [Vadim](http://vadimkantorov.com/)!
+
 ### Architecture
 
 <p align="left">
