@@ -2,6 +2,9 @@
 
 By [Peng Tang](https://ppengtang.github.io/), [Xinggang Wang](http://mclab.eic.hust.edu.cn/~xwang/index.htm), [Xiang Bai](http://mclab.eic.hust.edu.cn/~xbai/), and [Wenyu Liu](http://mclab.eic.hust.edu.cn/MCWebDisplay/PersonDetails.aspx?Name=Wenyu%20Liu).
 
+**The code to train and eval OICR using PyTorch as backend is available [here](https://github.com/vadimkantorov/caffemodel2pytorch/blob/master/README.md).
+Thanks [Vadim](http://vadimkantorov.com/)!**
+
 ### Introduction
 
 **Online Instance Classifier Refinement (OICR)** is a framework for weakly supervised object detection with deep ConvNets. 
@@ -9,9 +12,6 @@ By [Peng Tang](https://ppengtang.github.io/), [Xinggang Wang](http://mclab.eic.h
  - Our code is written by C++ and Python, based on [Caffe](http://caffe.berkeleyvision.org/), [fast r-cnn](https://github.com/rbgirshick/fast-rcnn), and [faster r-cnn](https://github.com/rbgirshick/py-faster-rcnn).
 
 The paper has been accepted by CVPR 2017. For more details, please refer to our [paper](https://arxiv.org/abs/1704.00138).
-
-**The code to train and eval OICR using PyTorch as backend is available [here](https://github.com/vadimkantorov/caffemodel2pytorch/blob/master/README.md).
-Thanks [Vadim](http://vadimkantorov.com/)!**
 
 ### Architecture
 
@@ -91,54 +91,54 @@ If you find OICR useful in your research, please consider citing:
   ```
 
 2. Build the Cython modules
-    ```Shell
-    cd $OICR_ROOT/lib
-    make
-    ```
+  ```Shell
+  cd $OICR_ROOT/lib
+  make
+  ```
     
 3. Build Caffe and pycaffe
-    ```Shell
-    cd $OICR_ROOT/caffe-oicr
-    # Now follow the Caffe installation instructions here:
-    #   http://caffe.berkeleyvision.org/installation.html
+  ```Shell
+  cd $OICR_ROOT/caffe-oicr
+  # Now follow the Caffe installation instructions here:
+  #   http://caffe.berkeleyvision.org/installation.html
 
-    # If you're experienced with Caffe and have all of the requirements installed
-    # and your Makefile.config in place, then simply do:
-    make all -j 8
-    make pycaffe
-    ```
+  # If you're experienced with Caffe and have all of the requirements installed
+  # and your Makefile.config in place, then simply do:
+  make all -j 8
+  make pycaffe
+  ```
 
 ### Installation for training and testing
 1. Download the training, validation, test data and VOCdevkit
 
-    ```Shell
-    wget http://host.robots.ox.ac.uk/pascal/VOC/voc2007/VOCtrainval_06-Nov-2007.tar
-    wget http://host.robots.ox.ac.uk/pascal/VOC/voc2007/VOCtest_06-Nov-2007.tar
-    wget http://host.robots.ox.ac.uk/pascal/VOC/voc2012/VOCdevkit_18-May-2011.tar
-    ```
+  ```Shell
+  wget http://host.robots.ox.ac.uk/pascal/VOC/voc2007/VOCtrainval_06-Nov-2007.tar
+  wget http://host.robots.ox.ac.uk/pascal/VOC/voc2007/VOCtest_06-Nov-2007.tar
+  wget http://host.robots.ox.ac.uk/pascal/VOC/voc2012/VOCdevkit_18-May-2011.tar
+  ```
 2. Extract all of these tars into one directory named `VOCdevkit`
 
-    ```Shell
-    tar xvf VOCtrainval_06-Nov-2007.tar
-    tar xvf VOCtest_06-Nov-2007.tar
-    tar xvf VOCdevkit_18-May-2011.tar
-    ```
+  ```Shell
+  tar xvf VOCtrainval_06-Nov-2007.tar
+  tar xvf VOCtest_06-Nov-2007.tar
+  tar xvf VOCdevkit_18-May-2011.tar
+  ```
 3. It should have this basic structure
 
-    ```Shell
-    $VOCdevkit/                           # development kit
-    $VOCdevkit/VOCcode/                   # VOC utility code
-    $VOCdevkit/VOC2007                    # image sets, annotations, etc.
-    # ... and several other directories ...
-    ```
+  ```Shell
+  $VOCdevkit/                           # development kit
+  $VOCdevkit/VOCcode/                   # VOC utility code
+  $VOCdevkit/VOC2007                    # image sets, annotations, etc.
+  # ... and several other directories ...
+  ```
 
 4. Create symlinks for the PASCAL VOC dataset
 
-    ```Shell
-    cd $OICR_ROOT/data
-    ln -s $VOCdevkit VOCdevkit2007
-    ```
-    Using symlinks is a good idea because you will likely want to share the same PASCAL dataset installation between multiple projects.
+  ```Shell
+  cd $OICR_ROOT/data
+  ln -s $VOCdevkit VOCdevkit2007
+  ```
+  Using symlinks is a good idea because you will likely want to share the same PASCAL dataset installation between multiple projects.
 
 5. [Optional] follow similar steps to get PASCAL VOC 2012.
 
@@ -150,10 +150,10 @@ If you find OICR useful in your research, please consider citing:
 
 Pre-computed selective search boxes can also be downloaded for VOC2007 and VOC2012.
 
-```Shell
-cd $OICR_ROOT
-./data/scripts/fetch_selective_search_data.sh
-```
+  ```Shell
+  cd $OICR_ROOT
+  ./data/scripts/fetch_selective_search_data.sh
+  ```
 
 This will populate the `$OICR_ROOT/data` folder with `selective_selective_data`.
 (The script is copied from the [fast-rcnn](https://github.com/rbgirshick/fast-rcnn)).
@@ -162,10 +162,10 @@ This will populate the `$OICR_ROOT/data` folder with `selective_selective_data`.
 
 Pre-trained ImageNet models can be downloaded.
 
-```Shell
-cd $OICR_ROOT
-./data/scripts/fetch_imagenet_models.sh
-```
+  ```Shell
+  cd $OICR_ROOT
+  ./data/scripts/fetch_imagenet_models.sh
+  ```
 These models are all available in the [Caffe Model Zoo](https://github.com/BVLC/caffe/wiki/Model-Zoo), but are provided here for your convenience.
 (The script is copied from the [fast-rcnn](https://github.com/rbgirshick/fast-rcnn)).
 
@@ -173,39 +173,39 @@ These models are all available in the [Caffe Model Zoo](https://github.com/BVLC/
 
 **Train** a OICR_ROOT network. For example, train a VGG16 network on VOC 2007 trainval:
 
-```Shell
-./tools/train_net.py --gpu 1 --solver models/VGG16/solver.prototxt \
-	--weights data/imagenet_models/$VGG16_model_name --iters 70000
-```
+  ```Shell
+  ./tools/train_net.py --gpu 1 --solver models/VGG16/solver.prototxt \
+    --weights data/imagenet_models/$VGG16_model_name --iters 70000
+  ```
 
 **Test** a OICR network. For example, test the VGG 16 network on VOC 2007 test:
 
 #### On trainval
-```Shell
-./tools/test_net.py --gpu 1 --def models/VGG16/test.prototxt \
-  --net output/default/voc_2007_trainval/vgg16_oicr_iter_70000.caffemodel \
-  --imdb voc_2007_trainval
-```
+  ```Shell
+  ./tools/test_net.py --gpu 1 --def models/VGG16/test.prototxt \
+    --net output/default/voc_2007_trainval/vgg16_oicr_iter_70000.caffemodel \
+    --imdb voc_2007_trainval
+  ```
 
 #### On test
-```Shell
-./tools/test_net.py --gpu 1 --def models/VGG16/test.prototxt \
-  --net output/default/voc_2007_trainval/vgg16_oicr_iter_70000.caffemodel \
-  --imdb voc_2007_test
-```
+  ```Shell
+  ./tools/test_net.py --gpu 1 --def models/VGG16/test.prototxt \
+    --net output/default/voc_2007_trainval/vgg16_oicr_iter_70000.caffemodel \
+    --imdb voc_2007_test
+  ```
 
 Test output is written underneath `$OICR_ROOT/output`.
 
 #### Evaluation
 For mAP, run the python code tools/reval.py
-```Shell
-./tools/reval.py $output_dir --imdb voc_2007_test --matlab
-```
+  ```Shell
+  ./tools/reval.py $output_dir --imdb voc_2007_test --matlab
+  ```
 
 For CorLoc, run the python code tools/reval_discovery.py
-```Shell
-./tools/reval_discovery.py $output_dir --imdb voc_2007_trainval
-```
+  ```Shell
+  ./tools/reval_discovery.py $output_dir --imdb voc_2007_trainval
+  ```
 
 
 The codes for training fast rcnn by pseudo ground truths are available on [here](https://github.com/ppengtang/fast-rcnn).
