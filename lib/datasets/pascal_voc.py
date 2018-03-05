@@ -240,7 +240,7 @@ class pascal_voc(datasets.imdb):
             'ImageSets',
             'Main',
             self._image_set + '.txt')
-        cachedir = os.path.join(self._devkit_path, 'annotations_cache')
+        cachedir = os.path.join(self._devkit_path, 'annotations_cache_{}'.format(self._year))
         aps = []
         # The PASCAL VOC metric changed in 2010
         use_07_metric = True if int(self._year) < 2010 else False
@@ -300,7 +300,7 @@ class pascal_voc(datasets.imdb):
             'ImageSets',
             'Main',
             self._image_set + '.txt')
-        cachedir = os.path.join(self._devkit_path, 'annotations_dis_cache')
+        cachedir = os.path.join(self._devkit_path, 'annotations_dis_cache_{}'.format(self._year))
         corlocs = []
         if not os.path.isdir(output_dir):
             os.mkdir(output_dir)
