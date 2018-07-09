@@ -1,52 +1,62 @@
-# Multiple Instance Detection Network with Online Instance Classifier Refinement 
+# PCL: Proposal Cluster Learning for Weakly Supervised Object Detection 
 
-By [Peng Tang](https://ppengtang.github.io/), [Xinggang Wang](http://mclab.eic.hust.edu.cn/~xwang/index.htm), [Xiang Bai](http://mclab.eic.hust.edu.cn/~xbai/), and [Wenyu Liu](http://mclab.eic.hust.edu.cn/MCWebDisplay/PersonDetails.aspx?Name=Wenyu%20Liu).
+By [Peng Tang](https://pengtang.xyz/), [Xinggang Wang](http://www.xinggangw.info/), [Song Bai](http://songbai.site/), [Wei Shen](http://songbai.site/), [Xiang Bai](http://122.205.5.5:8071/~xbai/), [Wenyu Liu](http://mclab.eic.hust.edu.cn/MCWebDisplay/PersonDetails.aspx?Name=Wenyu%20Liu), and [Alan Yuille](http://www.cs.jhu.edu/~ayuille/).
 
-**The code to train and eval OICR using PyTorch as backend is available [here](https://github.com/vadimkantorov/caffemodel2pytorch/blob/master/README.md).
+**The code to train and eval our original OICR using PyTorch as backend is available [here](https://github.com/vadimkantorov/caffemodel2pytorch/blob/master/README.md).
 Thanks [Vadim](http://vadimkantorov.com/)!**
 
 ### Introduction
 
-**Online Instance Classifier Refinement (OICR)** is a framework for weakly supervised object detection with deep ConvNets. 
- - It achieves state-of-the-art performance on weakly supervised object detection (Pascal VOC 2007 and 2012).
+**Proposal Cluster Learning (PCL)** is a framework for weakly supervised object detection with deep ConvNets. 
+ - It achieves state-of-the-art performance on weakly supervised object detection (Pascal VOC 2007 and 2012, ImageNet DET).
  - Our code is written by C++ and Python, based on [Caffe](http://caffe.berkeleyvision.org/), [fast r-cnn](https://github.com/rbgirshick/fast-rcnn), and [faster r-cnn](https://github.com/rbgirshick/py-faster-rcnn).
 
-The paper has been accepted by CVPR 2017. For more details, please refer to our [paper](https://arxiv.org/abs/1704.00138).
+The original paper has been accepted by CVPR 2017. This is an extened version.
+For more details, please refer to [here](https://arxiv.org/abs/1704.00138) and [here]().
 
 ### Architecture
 
 <p align="left">
-<img src="images/architecture.jpg" alt="OICR architecture" width="900px">
+<img src="images/method_compare.jpg" alt="method compare" width="450px">
+
+<p align="left">
+<img src="images/architecture.jpg" alt="PCL architecture" width="900px">
 </p>
 
 ### Results
 
-| Method | VOC2007 test *mAP* | VOC2007 trainval *CorLoc* | VOC2012 test *mAP* | VOC2012 trainval *CorLoc*
-|:-------|:-----:|:-------:|:-------:|:-------:|
-| OICR-VGG_M | 37.9 | 57.3 | 34.6 | 60.7 |
-| OICR-VGG16 | 41.2 | 60.6 | 37.9 | 62.1 |
-| OICR-Ens. | 42.0 | 61.2 | 38.2 | 63.5 |
-| OICR-Ens.+FRCNN | 47.0 | 64.3 | 42.5 | 65.6 |
+| Method | VOC2007 test *mAP* | VOC2007 trainval *CorLoc* | VOC2012 test *mAP* | VOC2012 trainval *CorLoc* | ImageNet *mAP*
+|:-------|:-----:|:-------:|:-------:|:-------:|:-------:|
+| PCL-VGG_M | 40.8 | 59.6 | 37.6 | 62.9 | 14.4 |
+| PCL-VGG16 | 43.5 | 62.7 | 40.6 | 63.2 | 18.4 |
+| PCL-Ens. | 45.8 | 63.0 | 41.6 | 65.0 | 18.8 |
+| PCL-Ens.+FRCNN | 48.8 | 66.6 | 44.2 | 68.0 | 19.6 |
 
 ### Visualizations
 
 <p align="left">
-<img src="images/detections.jpg" alt="Some OICR visualization results" width="800px">
+<img src="images/detections.jpg" alt="Some visualization results" width="800px">
 </p>
-Some OICR visualization results.
+Some PCL visualization results.
 
 <p align="left">
-<img src="images/detections_compare.jpg" alt="Some visualization comparisons among WSDDN, WSDDN+context, and OICR" width="800px">
+<img src="images/detections_compare.jpg" alt="Some visualization comparisons among WSDDN, WSDDN+context, and PCL" width="800px">
 </p>
-Some visualization comparisons among WSDDN, WSDDN+context, and OICR.
+Some visualization comparisons among WSDDN, WSDDN+context, and PCL.
 
 ### License
 
-OICR is released under the MIT License (refer to the LICENSE file for details).
+PCL is released under the MIT License (refer to the LICENSE file for details).
 
-### Citing OICR
+### Citing PCL
 
-If you find OICR useful in your research, please consider citing:
+If you find PCL useful in your research, please consider citing:
+    @article{tang2018article,
+        Author = {Tang, Peng and Wang, Xinggang and Bai, Song and Shen, Wei and Bai, Xiang and Liu, Wenyu and Yuille, Alan},
+        Title = {{PCL}: Proposal Cluster Learning for Weakly Supervised Object Detection},
+        Journal = {arXiv},
+        Year = {2018}
+    }
 
     @inproceedings{tang2017multiple,
         Author = {Tang, Peng and Wang, Xinggang and Bai, Xiang and Liu, Wenyu},
@@ -62,7 +72,8 @@ If you find OICR useful in your research, please consider citing:
 4. [Installation for training and testing](#installation-for-training-and-testing)
 5. [Extra Downloads (selective search)](#download-pre-computed-selective-search-object-proposals)
 6. [Extra Downloads (ImageNet models)](#download-pre-trained-imagenet-models)
-7. [Usage](#usage)
+7. [Extra Downloads (Models trained on PASCAL VOC)](#download-models-trained-on-pascal-voc)
+8. [Usage](#usage)
 
 ### Requirements: software
 
@@ -84,21 +95,22 @@ If you find OICR useful in your research, please consider citing:
 
 ### Installation
 
-1. Clone the OICR repository
+1. Clone the PCL repository
   ```Shell
-  # Make sure to clone with --recursive
-  git clone --recursive https://github.com/ppengtang/oicr.git
+  git clone https://github.com/ppengtang/oicr.git & cd oicr
+  git check -b pcl
+  git clone https://github.com/ppengtang/caffe.git
   ```
 
 2. Build the Cython modules
   ```Shell
-  cd $OICR_ROOT/lib
+  cd $PCL_ROOT/lib
   make
   ```
     
 3. Build Caffe and pycaffe
   ```Shell
-  cd $OICR_ROOT/caffe-oicr
+  cd $PCL_ROOT/caffe
   # Now follow the Caffe installation instructions here:
   #   http://caffe.berkeleyvision.org/installation.html
 
@@ -135,27 +147,27 @@ If you find OICR useful in your research, please consider citing:
 4. Create symlinks for the PASCAL VOC dataset
 
   ```Shell
-  cd $OICR_ROOT/data
+  cd $PCL_ROOT/data
   ln -s $VOCdevkit VOCdevkit2007
   ```
   Using symlinks is a good idea because you will likely want to share the same PASCAL dataset installation between multiple projects.
 
 5. [Optional] follow similar steps to get PASCAL VOC 2012.
 
-6. You should put the generated proposal data under the folder $OICR_ROOT/data/selective_search_data, with the name "voc_2007_trainval.mat", "voc_2007_test.mat", just as the form of [fast-rcnn](https://github.com/rbgirshick/fast-rcnn).
+6. You should put the generated proposal data under the folder $PCL_ROOT/data/selective_search_data, with the name "voc_2007_trainval.mat", "voc_2007_test.mat", just as the form of [fast-rcnn](https://github.com/rbgirshick/fast-rcnn).
 
-7. The pre-trained models are all available in the [Caffe Model Zoo](https://github.com/BVLC/caffe/wiki/Model-Zoo). You should put it under the folder $OICR_ROOT/data/imagenet_models, just as the form of [fast-rcnn](https://github.com/rbgirshick/fast-rcnn).
+7. The pre-trained models are all available in the [Caffe Model Zoo](https://github.com/BVLC/caffe/wiki/Model-Zoo). You should put it under the folder $PCL_ROOT/data/imagenet_models, just as the form of [fast-rcnn](https://github.com/rbgirshick/fast-rcnn).
 
 ### Download pre-computed Selective Search object proposals
 
 Pre-computed selective search boxes can also be downloaded for VOC2007 and VOC2012.
 
   ```Shell
-  cd $OICR_ROOT
+  cd $PCL_ROOT
   ./data/scripts/fetch_selective_search_data.sh
   ```
 
-This will populate the `$OICR_ROOT/data` folder with `selective_selective_data`.
+This will populate the `$PCL_ROOT/data` folder with `selective_selective_data`.
 (The script is copied from the [fast-rcnn](https://github.com/rbgirshick/fast-rcnn)).
 
 ### Download pre-trained ImageNet models
@@ -163,38 +175,42 @@ This will populate the `$OICR_ROOT/data` folder with `selective_selective_data`.
 Pre-trained ImageNet models can be downloaded.
 
   ```Shell
-  cd $OICR_ROOT
+  cd $PCL_ROOT
   ./data/scripts/fetch_imagenet_models.sh
   ```
 These models are all available in the [Caffe Model Zoo](https://github.com/BVLC/caffe/wiki/Model-Zoo), but are provided here for your convenience.
 (The script is copied from the [fast-rcnn](https://github.com/rbgirshick/fast-rcnn)).
 
+### Download models trained on PASCAL VOC
+
+Models trained on PASCAL VOC can be downloaded [here]().
+
 ### Usage
 
-**Train** a OICR_ROOT network. For example, train a VGG16 network on VOC 2007 trainval:
+**Train** a PCL network. For example, train a VGG16 network on VOC 2007 trainval (**The codes to train the models will come soon**):
 
   ```Shell
   ./tools/train_net.py --gpu 1 --solver models/VGG16/solver.prototxt \
-    --weights data/imagenet_models/$VGG16_model_name --iters 70000
+    --weights data/imagenet_models/$VGG16_model_name --iters 50000
   ```
 
-**Test** a OICR network. For example, test the VGG 16 network on VOC 2007 test:
+**Test** a PCL network. For example, test the VGG 16 network on VOC 2007 test:
 
 #### On trainval
   ```Shell
   ./tools/test_net.py --gpu 1 --def models/VGG16/test.prototxt \
-    --net output/default/voc_2007_trainval/vgg16_oicr_iter_70000.caffemodel \
+    --net output/default/voc_2007_trainval/vgg16_pcl_iter_50000.caffemodel \
     --imdb voc_2007_trainval
   ```
 
 #### On test
   ```Shell
   ./tools/test_net.py --gpu 1 --def models/VGG16/test.prototxt \
-    --net output/default/voc_2007_trainval/vgg16_oicr_iter_70000.caffemodel \
+    --net output/default/voc_2007_trainval/vgg16_pcl_iter_50000.caffemodel \
     --imdb voc_2007_test
   ```
 
-Test output is written underneath `$OICR_ROOT/output`.
+Test output is written underneath `$PCL_ROOT/output`.
 
 #### Evaluation
 For mAP, run the python code tools/reval.py
