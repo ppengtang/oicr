@@ -14,10 +14,15 @@ Thanks [Vadim](http://vadimkantorov.com/)!**
 The original paper has been accepted by CVPR 2017. This is an extened version.
 For more details, please refer to [here](https://arxiv.org/abs/1704.00138) and [here]().
 
-### Architecture
+### Comparison with other methods
+(a) Conventional MIL method
+(b) Our original OICR method with newly proposed proposal cluster generation method
+(c) Our method
 
 <p align="left">
 <img src="images/method_compare.jpg" alt="method compare" width="500px">
+
+### Architecture
 
 <p align="left">
 <img src="images/architecture.jpg" alt="PCL architecture" width="900px">
