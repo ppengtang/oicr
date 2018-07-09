@@ -17,7 +17,7 @@ For more details, please refer to [here](https://arxiv.org/abs/1704.00138) and [
 ### Architecture
 
 <p align="left">
-<img src="images/method_compare.jpg" alt="method compare" width="450px">
+<img src="images/method_compare.jpg" alt="method compare" width="500px">
 
 <p align="left">
 <img src="images/architecture.jpg" alt="PCL architecture" width="900px">
@@ -35,12 +35,12 @@ For more details, please refer to [here](https://arxiv.org/abs/1704.00138) and [
 ### Visualizations
 
 <p align="left">
-<img src="images/detections.jpg" alt="Some visualization results" width="800px">
+<img src="images/detections.jpg" alt="Some visualization results" width="900px">
 </p>
 Some PCL visualization results.
 
 <p align="left">
-<img src="images/detections_compare.jpg" alt="Some visualization comparisons among WSDDN, WSDDN+context, and PCL" width="800px">
+<img src="images/detections_compare.jpg" alt="Some visualization comparisons among WSDDN, WSDDN+context, and PCL" width="900px">
 </p>
 Some visualization comparisons among WSDDN, WSDDN+context, and PCL.
 
