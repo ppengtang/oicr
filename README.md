@@ -56,6 +56,7 @@ PCL is released under the MIT License (refer to the LICENSE file for details).
 ### Citing PCL
 
 If you find PCL useful in your research, please consider citing:
+
     @article{tang2018article,
         Author = {Tang, Peng and Wang, Xinggang and Bai, Song and Shen, Wei and Bai, Xiang and Liu, Wenyu and Yuille, Alan},
         Title = {{PCL}: Proposal Cluster Learning for Weakly Supervised Object Detection},
