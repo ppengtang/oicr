@@ -15,9 +15,9 @@ The original paper has been accepted by CVPR 2017. This is an extened version.
 For more details, please refer to [here](https://arxiv.org/abs/1704.00138) and [here]().
 
 ### Comparison with other methods
-(a) Conventional MIL method
-(b) Our original OICR method with newly proposed proposal cluster generation method
-(c) Our method
+(a) Conventional MIL method;
+(b) Our original OICR method with newly proposed proposal cluster generation method;
+(c) Our PCL method.
 
 <p align="left">
 <img src="images/method_compare.jpg" alt="method compare" width="500px">
@@ -39,15 +39,15 @@ For more details, please refer to [here](https://arxiv.org/abs/1704.00138) and [
 
 ### Visualizations
 
+Some PCL visualization results.
 <p align="left">
 <img src="images/detections.jpg" alt="Some visualization results" width="900px">
 </p>
-Some PCL visualization results.
 
+Some visualization comparisons among WSDDN, WSDDN+context, and PCL.
 <p align="left">
 <img src="images/detections_compare.jpg" alt="Some visualization comparisons among WSDDN, WSDDN+context, and PCL" width="900px">
 </p>
-Some visualization comparisons among WSDDN, WSDDN+context, and PCL.
 
 ### License
 
@@ -188,11 +188,13 @@ These models are all available in the [Caffe Model Zoo](https://github.com/BVLC/
 
 ### Download models trained on PASCAL VOC
 
-Models trained on PASCAL VOC can be downloaded [here]().
+Models trained on PASCAL VOC can be downloaded [here](https://drive.google.com/drive/folders/1aqhAxPgrHdJoMncddQ73YiNXtiENEX3b?usp=sharing).
 
 ### Usage
 
-**Train** a PCL network. For example, train a VGG16 network on VOC 2007 trainval (**The codes to train the models will come soon**):
+**Train** a PCL network. For example, train a VGG16 network on VOC 2007 trainval
+(**The codes to train the models here are still the original OICR codes.
+The codes to train PCL will come soon**):
 
   ```Shell
   ./tools/train_net.py --gpu 1 --solver models/VGG16/solver.prototxt \
