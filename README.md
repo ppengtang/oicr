@@ -12,7 +12,7 @@ Thanks [Vadim](http://vadimkantorov.com/)!**
  - Our code is written by C++ and Python, based on [Caffe](http://caffe.berkeleyvision.org/), [fast r-cnn](https://github.com/rbgirshick/fast-rcnn), and [faster r-cnn](https://github.com/rbgirshick/py-faster-rcnn).
 
 The original paper has been accepted by CVPR 2017. This is an extened version.
-For more details, please refer to [here](https://arxiv.org/abs/1704.00138) and [here]().
+For more details, please refer to [here](https://arxiv.org/abs/1704.00138) and [here](https://arxiv.org/abs/1807.03342).
 
 ### Comparison with other methods
 (a) Conventional MIL method;
@@ -57,18 +57,19 @@ PCL is released under the MIT License (refer to the LICENSE file for details).
 
 If you find PCL useful in your research, please consider citing:
 
-    @article{tang2018article,
-        Author = {Tang, Peng and Wang, Xinggang and Bai, Song and Shen, Wei and Bai, Xiang and Liu, Wenyu and Yuille, Alan},
-        Title = {{PCL}: Proposal Cluster Learning for Weakly Supervised Object Detection},
-        Journal = {arXiv},
-        Year = {2018}
+    @article{tang2018pcl,
+        author = {Tang, Peng and Wang, Xinggang and Bai, Song and Shen, Wei and Bai, Xiang and Liu, Wenyu and Yuille, Alan},
+        title = {{PCL}: Proposal Cluster Learning for Weakly Supervised Object Detection},
+        journal = {arXiv preprint arXiv:1807.03342},
+        year = {2018}
     }
 
     @inproceedings{tang2017multiple,
-        Author = {Tang, Peng and Wang, Xinggang and Bai, Xiang and Liu, Wenyu},
-        Title = {Multiple Instance Detection Network with Online Instance Classifier Refinement},
-        Booktitle = {CVPR},
-        Year = {2017}
+        author = {Tang, Peng and Wang, Xinggang and Bai, Xiang and Liu, Wenyu},
+        title = {Multiple Instance Detection Network with Online Instance Classifier Refinement},
+        booktitle = {IEEE Conference on Computer Vision and Pattern Recognition},
+        pages = {3059--3067},
+        year = {2017}
     }
 
 ### Contents
