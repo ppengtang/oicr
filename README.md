@@ -195,11 +195,9 @@ Models trained on PASCAL VOC can be downloaded [here](https://drive.google.com/d
 ### Usage
 
 **Train** a PCL network. For example, train a VGG16 network on VOC 2007 trainval
-(**The codes to train the models here are still the original OICR codes.
-The codes to train PCL will come soon**):
 
   ```Shell
-  ./tools/train_net.py --gpu 1 --solver models/VGG16/solver.prototxt \
+  ./tools/train_net.py --gpu 1 --solver models/VGG16/solver_voc2007.prototxt \
     --weights data/imagenet_models/$VGG16_model_name --iters 50000
   ```
 
