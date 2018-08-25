@@ -5,8 +5,8 @@ By [Peng Tang](https://ppengtang.github.io/), [Xinggang Wang](http://mclab.eic.h
 **The code to train and eval OICR using PyTorch as backend is available [here](https://github.com/vadimkantorov/caffemodel2pytorch/blob/master/README.md).
 Thanks [Vadim](http://vadimkantorov.com/)!**
 
-**<u>We have released the codes of our PCL work at [here](https://github.com/ppengtang/oicr/tree/pcl).
-The PCL is the extension of OICR and obtains better performance than OICR!</u>**
+**We have released the codes of our [PCL](https://arxiv.org/abs/1807.03342) work at [here](https://github.com/ppengtang/oicr/tree/pcl).
+The PCL is the extension of OICR and obtains better performance than OICR!**
 
 ### Introduction
 
