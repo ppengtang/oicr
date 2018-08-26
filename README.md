@@ -93,7 +93,7 @@ If you find PCL useful in your research, please consider citing:
   WITH_PYTHON_LAYER := 1
   ```
 
-2. Python packages you might not have: `cython`, `python-opencv`, `easydict`
+2. Python packages you might not have: `cython`, `python-opencv`, `easydict`, `sklearn`
 3. MATLAB
 
 ### Requirements: hardware
