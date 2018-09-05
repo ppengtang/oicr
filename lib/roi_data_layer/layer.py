@@ -22,15 +22,19 @@ from multiprocessing import Process, Queue
 class RoIDataLayer(caffe.Layer):
     """Fast R-CNN data layer used for training."""
 
-    def _shuffle_roidb_inds(self):
+    def _shuffle_roidb_inds(self, gpu_id):
+        self.gpu_id = gpu_id
         """Randomly permute the training roidb."""
+        np.random.seed(gpu_id + self.count)
+        self.count += 10
         self._perm = np.random.permutation(np.arange(len(self._roidb)))
+        # self._perm = np.arange(len(self._roidb))
         self._cur = 0
 
     def _get_next_minibatch_inds(self):
         """Return the roidb indices for the next minibatch."""
         if self._cur + cfg.TRAIN.IMS_PER_BATCH >= len(self._roidb):
-            self._shuffle_roidb_inds()
+            self._shuffle_roidb_inds(self.gpu_id)
 
         db_inds = self._perm[self._cur:self._cur + cfg.TRAIN.IMS_PER_BATCH]
         self._cur += cfg.TRAIN.IMS_PER_BATCH
@@ -49,10 +53,11 @@ class RoIDataLayer(caffe.Layer):
             minibatch_db = [self._roidb[i] for i in db_inds]
             return get_minibatch(minibatch_db, self._num_classes)
 
-    def set_roidb(self, roidb):
+    def set_roidb(self, roidb, gpu_id=0):
         """Set the roidb to be used by this layer during training."""
         self._roidb = roidb
-        self._shuffle_roidb_inds()
+        self.count = 0
+        self._shuffle_roidb_inds(gpu_id)
         if cfg.TRAIN.USE_PREFETCH:
             self._blob_queue = Queue(10)
             self._prefetch_process = BlobFetcher(self._blob_queue,
@@ -128,6 +133,7 @@ class BlobFetcher(Process):
         """Randomly permute the training roidb."""
         # TODO(rbg): remove duplicated code
         self._perm = np.random.permutation(np.arange(len(self._roidb)))
+        # self._perm = np.arange(len(self._roidb))
         self._cur = 0
 
     def _get_next_minibatch_inds(self):

@@ -1,1 +1,1 @@
-Tools for training and testing Online Instance Classifier Refinement networks.
+Tools for training and testing Proposal Cluster Learning networks.

@@ -353,20 +353,6 @@ layer {
 }
 
 layer {
-  name: "oicr_layer"
-  type: "Python"
-  bottom: "rois"
-  bottom: "midn_prob"
-  bottom: "labels"
-  top: "labels_ic"
-  top: "cls_loss_weights"
-  python_param {
-    module: 'oicr_layer.layer'
-    layer: 'OICRLayer'
-    param_str: "'num_classes': 21"
-  }
-}
-layer {
   name: "ic_score"
   type: "InnerProduct"
   bottom: "fc7"
@@ -391,18 +377,6 @@ layer {
     }
   }
 }
-layer {
-  name: "loss_oicr"
-  type: "WeightedSoftmaxWithLoss"
-  bottom: "ic_score"
-  bottom: "labels_ic"
-  bottom: "cls_loss_weights"
-  propagate_down: 1
-  propagate_down: 0
-  propagate_down: 0
-  top: "loss_oicr"
-  loss_weight: 1
-}
 
 layer {
   name: "ic_prob"
@@ -412,19 +386,51 @@ layer {
 }
 
 layer {
-  name: "oicr_layer1"
+  name: "oicr_layer"
   type: "Python"
   bottom: "rois"
-  bottom: "ic_prob"
+  bottom: "midn_prob"
   bottom: "labels"
-  top: "labels_ic1"
-  top: "cls_loss_weights1"
+  bottom: "ic_prob"
+  top: "labels_ic"
+  top: "cls_loss_weights"
+  top: "gt_assignment"
+  top: "pc_labels"
+  top: "pc_probs"
+  top: "pc_count"
+  top: "img_cls_loss_weights"
+  top: "im_labels"
   python_param {
     module: 'oicr_layer.layer'
     layer: 'OICRLayer'
     param_str: "'num_classes': 21"
   }
 }
+
+layer {
+  name: "loss_refine"
+  type: "RefineLoss"
+  bottom: "ic_prob"
+  bottom: "labels_ic"
+  bottom: "cls_loss_weights"
+  bottom: "gt_assignment"
+  bottom: "pc_labels"
+  bottom: "pc_probs"
+  bottom: "pc_count"
+  bottom: "img_cls_loss_weights"
+  bottom: "im_labels"
+  top: "loss_refine"
+  propagate_down: 1
+  propagate_down: 0
+  propagate_down: 0
+  propagate_down: 0
+  propagate_down: 0
+  propagate_down: 0
+  propagate_down: 0
+  propagate_down: 0
+  propagate_down: 0
+}
+
 layer {
   name: "ic_score1"
   type: "InnerProduct"
@@ -450,18 +456,6 @@ layer {
     }
   }
 }
-layer {
-  name: "loss_oicr1"
-  type: "WeightedSoftmaxWithLoss"
-  bottom: "ic_score1"
-  bottom: "labels_ic1"
-  bottom: "cls_loss_weights1"
-  propagate_down: 1
-  propagate_down: 0
-  propagate_down: 0
-  top: "loss_oicr1"
-  loss_weight: 1
-}
 
 layer {
   name: "ic_prob1"
@@ -471,19 +465,50 @@ layer {
 }
 
 layer {
-  name: "oicr_layer2"
+  name: "oicr_layer1"
   type: "Python"
   bottom: "rois"
-  bottom: "ic_prob1"
+  bottom: "ic_prob"
   bottom: "labels"
-  top: "labels_ic2"
-  top: "cls_loss_weights2"
+  bottom: "ic_prob1"
+  top: "labels_ic1"
+  top: "cls_loss_weights1"
+  top: "gt_assignment1"
+  top: "pc_labels1"
+  top: "pc_probs1"
+  top: "pc_count1"
+  top: "img_cls_loss_weights1"
   python_param {
     module: 'oicr_layer.layer'
     layer: 'OICRLayer'
     param_str: "'num_classes': 21"
   }
 }
+
+layer {
+  name: "loss_refine1"
+  type: "RefineLoss"
+  bottom: "ic_prob1"
+  bottom: "labels_ic1"
+  bottom: "cls_loss_weights1"
+  bottom: "gt_assignment1"
+  bottom: "pc_labels1"
+  bottom: "pc_probs1"
+  bottom: "pc_count1"
+  bottom: "img_cls_loss_weights1"
+  bottom: "im_labels"
+  top: "loss_refine1"
+  propagate_down: 1
+  propagate_down: 0
+  propagate_down: 0
+  propagate_down: 0
+  propagate_down: 0
+  propagate_down: 0
+  propagate_down: 0
+  propagate_down: 0
+  propagate_down: 0
+}
+
 layer {
   name: "ic_score2"
   type: "InnerProduct"
@@ -509,15 +534,55 @@ layer {
     }
   }
 }
+
 layer {
-  name: "loss_oicr2"
-  type: "WeightedSoftmaxWithLoss"
+  name: "ic_prob2"
+  type: "Softmax"
   bottom: "ic_score2"
+  top: "ic_prob2"
+}
+
+layer {
+  name: "oicr_layer2"
+  type: "Python"
+  bottom: "rois"
+  bottom: "ic_prob1"
+  bottom: "labels"
+  bottom: "ic_prob2"
+  top: "labels_ic2"
+  top: "cls_loss_weights2"
+  top: "gt_assignment2"
+  top: "pc_labels2"
+  top: "pc_probs2"
+  top: "pc_count2"
+  top: "img_cls_loss_weights2"
+  python_param {
+    module: 'oicr_layer.layer'
+    layer: 'OICRLayer'
+    param_str: "'num_classes': 21"
+  }
+}
+
+layer {
+  name: "loss_refine2"
+  type: "RefineLoss"
+  bottom: "ic_prob2"
   bottom: "labels_ic2"
   bottom: "cls_loss_weights2"
+  bottom: "gt_assignment2"
+  bottom: "pc_labels2"
+  bottom: "pc_probs2"
+  bottom: "pc_count2"
+  bottom: "img_cls_loss_weights2"
+  bottom: "im_labels"
+  top: "loss_refine2"
   propagate_down: 1
   propagate_down: 0
   propagate_down: 0
-  top: "loss_oicr2"
-  loss_weight: 1
+  propagate_down: 0
+  propagate_down: 0
+  propagate_down: 0
+  propagate_down: 0
+  propagate_down: 0
+  propagate_down: 0
 }

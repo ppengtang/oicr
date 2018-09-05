@@ -32,7 +32,6 @@ __C.TRAIN = edict()
 # Scales to use during training (can list multiple scales)
 # Each scale is the pixel size of an image's shortest side
 __C.TRAIN.SCALES = (480, 576, 688, 864, 1200)
-# __C.TRAIN.SCALES = (400, 500, 600, 700, 800)
 # Max pixel size of the longest side of a scaled input image
 __C.TRAIN.MAX_SIZE = 2000
 
@@ -55,6 +54,15 @@ __C.TRAIN.USE_PREFETCH = False
 
 # Overlap threshold for a ROI to be considered foreground (if >= FG_THRESH)
 __C.TRAIN.FG_THRESH = 0.5
+
+# The maximum number of proposal clusters
+__C.TRAIN.MAX_PC_NUM = 5
+
+# The number of k-means clusters
+__C.TRAIN.NUM_KMEANS_CLUSTER = 3
+
+# The IoU threshold to build graph
+__C.TRAIN.GRAPH_IOU_THRESHOLD = 0.4
 
 #
 # Testing options
