@@ -107,7 +107,7 @@ If you find PCL useful in your research, please consider citing:
 1. Clone the PCL repository
   ```Shell
   git clone https://github.com/ppengtang/oicr.git & cd oicr
-  git checkout pcl
+  git checkout pcl-multiGPU
   ```
 
 2. Build the Cython modules
