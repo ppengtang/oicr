@@ -5,6 +5,8 @@ By [Peng Tang](https://pengtang.xyz/), [Xinggang Wang](http://www.xinggangw.info
 **The code to train and eval our original OICR using PyTorch as backend is available [here](https://github.com/vadimkantorov/caffemodel2pytorch/blob/master/README.md).
 Thanks [Vadim](http://vadimkantorov.com/)!**
 
+We provide an implementation that supports multi-gpu training at [here](https://github.com/ppengtang/oicr/tree/pcl-multiGPU).
+
 ### Introduction
 
 **Proposal Cluster Learning (PCL)** is a framework for weakly supervised object detection with deep ConvNets. 
@@ -105,7 +107,7 @@ If you find PCL useful in your research, please consider citing:
 1. Clone the PCL repository
   ```Shell
   git clone https://github.com/ppengtang/oicr.git & cd oicr
-  git check -b pcl
+  git checkout pcl
   git clone https://github.com/ppengtang/caffe.git
   ```
 
