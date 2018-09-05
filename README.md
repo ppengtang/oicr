@@ -108,7 +108,6 @@ If you find PCL useful in your research, please consider citing:
   ```Shell
   git clone https://github.com/ppengtang/oicr.git & cd oicr
   git checkout pcl
-  git clone https://github.com/ppengtang/caffe.git
   ```
 
 2. Build the Cython modules
