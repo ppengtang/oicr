@@ -91,8 +91,9 @@ If you find PCL useful in your research, please consider citing:
   **Note:** Caffe *must* be built with support for Python layers!
 
   ```make
-  # In your Makefile.config, make sure to have this line uncommented
+  # In your Makefile.config, make sure to have these lines uncommented
   WITH_PYTHON_LAYER := 1
+  USE_NCCL := 1
   ```
 
 2. Python packages you might not have: `cython`, `python-opencv`, `easydict`, `sklearn`
