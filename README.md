@@ -5,7 +5,7 @@ By [Peng Tang](https://pengtang.xyz/), [Xinggang Wang](http://www.xinggangw.info
 **The codes to train and eval our original OICR using PyTorch as backend is available [here](https://github.com/vadimkantorov/caffemodel2pytorch/blob/master/README.md).
 Thanks [Vadim](http://vadimkantorov.com/)!**
 
-**We provide [a small trick](https://github.com/ppengtang/oicr/tree/pcl#a-small-trick) that can improve the result of a single VGG16 model to 47.2% mAP on PASCAL VOC 2007!**
+**We provide [a small trick](https://github.com/ppengtang/oicr/blob/pcl-multiGPU/README.md#a-small-trick) that can improve the result of a single VGG16 model to 47.2% mAP on PASCAL VOC 2007!**
 
 **The [original implementation](https://github.com/ppengtang/oicr/tree/pcl) is based on the caffe which only supports single-gpu training for python.**
 
@@ -240,7 +240,7 @@ For CorLoc, run the python code tools/reval_discovery.py
 
 ### A small trick
 
-Uncomment these [two lines](https://github.com/ppengtang/oicr/blob/pcl/lib/oicr_layer/layer.py#L229-L230) to achieve 47.2% mAP on PASCAL VOC 2007 using a single VGG16 model!
+Uncomment these [two lines](https://github.com/ppengtang/oicr/blob/pcl-multiGPU/lib/oicr_layer/layer.py#L229-L230) to achieve 47.2% mAP on PASCAL VOC 2007 using a single VGG16 model!
 See [here](http://pengtang.xyz/publications/0640-supp.pdf) for details.
 
 The codes for training fast rcnn by pseudo ground truths are available on [here](https://github.com/ppengtang/fast-rcnn).
