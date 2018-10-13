@@ -9,6 +9,8 @@ Thanks [Vadim](http://vadimkantorov.com/)!**
 
 We provide an implementation that supports multi-gpu training at [here](https://github.com/ppengtang/oicr/tree/pcl-multiGPU).
 
+I have written a PyTorch implementation of our PCL. The codes are available by request (send an e-mail to the first author).
+
 ### Introduction
 
 **Proposal Cluster Learning (PCL)** is a framework for weakly supervised object detection with deep ConvNets. 
