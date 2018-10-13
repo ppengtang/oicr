@@ -88,7 +88,7 @@ If you find PCL useful in your research, please consider citing:
 6. [Extra Downloads (ImageNet models)](#download-pre-trained-imagenet-models)
 7. [Extra Downloads (Models trained on PASCAL VOC)](#download-models-trained-on-pascal-voc)
 8. [Usage](#usage)
-9. [A small Trick](#a-small-trick)
+9. [A small trick](#a-small-trick)
 
 ### Requirements: software
 
