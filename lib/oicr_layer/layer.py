@@ -226,6 +226,9 @@ def _get_proposal_clusters(all_rois, proposals, im_labels, cls_prob):
     labels[bg_inds] = 0
     gt_assignment[bg_inds] = -1
 
+    ig_inds = np.where(max_overlaps < 0.1)[0]
+    cls_loss_weights[ig_inds] = 0.0
+    
     img_cls_loss_weights = np.zeros(gt_boxes.shape[0], dtype=np.float32)
     pc_probs = np.zeros(gt_boxes.shape[0], dtype=np.float32)
     pc_labels = np.zeros(gt_boxes.shape[0], dtype=np.int32)
