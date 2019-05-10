@@ -9,6 +9,8 @@ Thanks [Vadim](http://vadimkantorov.com/)!**
 
 **The [original implementation](https://github.com/ppengtang/oicr/tree/pcl) is based on the caffe which only supports single-gpu training for python.**
 
+**I have written a PyTorch implementation of our PCL. The codes are available [here](https://github.com/ppengtang/pcl.pytorch). This version codes obtain 49.2% mAP and 65.0% CorLoc on PASCAL VOC 2007 dataset!**
+
 ### Introduction
 
 **Proposal Cluster Learning (PCL)** is a framework for weakly supervised object detection with deep ConvNets. 
