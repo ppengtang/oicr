@@ -9,7 +9,7 @@ Thanks [Vadim](http://vadimkantorov.com/)!**
 
 We provide an implementation that supports multi-gpu training at [here](https://github.com/ppengtang/oicr/tree/pcl-multiGPU).
 
-**I have written a PyTorch implementation of our PCL. The codes are available [here](https://github.com/ppengtang/pcl.pytorch). This version codes obtain 49.2% mAP and 65.0% CorLoc on PASCAL VOC 2007 dataset!**
+**I have written a PyTorch implementation of our PCL. The codes are available [here](https://github.com/ppengtang/pcl.pytorch). This version codes obtain ~~49.2% mAP and 65.0% CorLoc~~ 54.1% mAP and 69.5% on PASCAL VOC 2007 dataset!**
 
 ### Introduction
 
